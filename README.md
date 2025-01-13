@@ -17,6 +17,8 @@ Sportradar would like me to code a "socreboard library". The complete notes are 
 - in tickets, the `AS A` clauses can have these personas
 	- `user` refers to a user of the library (likely another engineer because this is a library, but we could imagine it as an end-user assembling a dashboard with a no-code interface too)
 	- `developer` the developer working on the project (me; these are tickets to add DX)
+- initially I felt "matches" could be modelled as a class. They're discrete data, and `new Match(homeTeam, awayTeam)` felt like a nice interface for them. 
+- later, having both an interface `TMatch` with just the scores, and a class `Match` with the other settings seemed to highlight how the Match class was poorly factored. Matches aren't used outside of the Scoreboard. Nothing else consumes them. Some of their concerns (`hasEnded`, `totalScore`) are only relevant to the internal workings of Scoreboard. So, instead, I think better to have a private static method to create them and to lose the class.
 
 ## Analysis
 
