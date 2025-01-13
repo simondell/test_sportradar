@@ -33,4 +33,17 @@ describe('startMatch()', () => {
 			}
 		]);
 	});
+
+	it('should allow multiple matches to be started', () => {
+		const board = new Scoreboard();
+
+		board.startMatch('team A', 'team b');
+		assert.equal(board.getMatches().length, 1);
+		board.startMatch('team c', 'team d');
+		assert.equal(board.getMatches().length, 2);
+		board.startMatch('team e', 'team f');
+		assert.equal(board.getMatches().length, 3);
+		board.startMatch('team g', 'team h');
+		assert.equal(board.getMatches().length, 4);
+	});
 });
