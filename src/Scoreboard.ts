@@ -1,23 +1,29 @@
 import { homedir } from "os";
 
-interface TMatch {
+interface ScoreRecord {
 	homeTeam: string;
 	homeScore: number;
 	awayTeam: string;
 	awayScore: number;
 }
 
-class Match implements TMatch {
-	public homeScore: number = 0;
-	public awayScore: number = 0;
-	public hasEnded = false;
-
-	constructor (public homeTeam: string, public awayTeam: string) {}
+interface Match extends ScoreRecord {
+	hasEnded: boolean;
 }
 
 export class Scoreboard {
 	private matches: Match[] = [];
 	private matchesByHomeTeam: {[key: string]: Match} = {};
+
+	private static createScoreRecord (homeTeam: string, awayTeam: string): Match {
+		return {
+			homeTeam,
+			awayTeam,
+			homeScore: 0,
+			awayScore: 0,
+			hasEnded: false,
+		}
+	}
 
 	endMatch (homeTeam: string) {
 		const thisMatch = this.matchesByHomeTeam[homeTeam];
@@ -25,7 +31,7 @@ export class Scoreboard {
 		delete this.matchesByHomeTeam[homeTeam];
 	}
 
-	getMatches (): TMatch[] {
+	getMatches (): ScoreRecord[] {
 		return (this.matches
 			.filter(match => !match.hasEnded)
 			.map(match => ({
@@ -38,7 +44,7 @@ export class Scoreboard {
 	}
 
 	startMatch (homeTeam: string, awayTeam: string) {
-		const newMatch = new Match(homeTeam, awayTeam);
+		const newMatch = Scoreboard.createScoreRecord(homeTeam, awayTeam);
 		this.matchesByHomeTeam[homeTeam] = newMatch;
 		this.matches.push(newMatch);
 	}
