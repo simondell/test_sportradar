@@ -1,6 +1,6 @@
 {
   "name": "simple-score-board",
-  "version": "0.0.1",
+  "version": "0.3.0",
   "description": "A solution to Sportradar's coding challenge",
   "main": "index.js",
   "scripts": {
