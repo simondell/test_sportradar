@@ -19,7 +19,7 @@ describe('getMatches()', () => {
 });
 
 describe('startMatch()', () => {
-	it('should all new matches to be started', () => {
+	it('should allow new matches to be started', () => {
 		const board = new Scoreboard();
 
 		board.startMatch('Mock home team', 'Mock away team');
