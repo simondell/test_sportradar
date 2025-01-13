@@ -1,3 +1,5 @@
+import { homedir } from "os";
+
 interface TMatch {
 	homeTeam: string;
 	homeScore: number;
@@ -39,5 +41,11 @@ export class Scoreboard {
 		const newMatch = new Match(homeTeam, awayTeam);
 		this.matchesByHomeTeam[homeTeam] = newMatch;
 		this.matches.push(newMatch);
+	}
+
+	updateScore (homeTeam: string, homeScore: number, awayScore: number) {
+		const thisMatch = this.matchesByHomeTeam[homeTeam];
+		thisMatch.homeScore = homeScore;
+		thisMatch.awayScore = awayScore;
 	}
 }
