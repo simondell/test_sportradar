@@ -47,3 +47,14 @@ describe('startMatch()', () => {
 		assert.equal(board.getMatches().length, 4);
 	});
 });
+
+describe('endMatch()', () => {
+	it('should allow matches to be ended', () => {
+		const board = new Scoreboard();
+
+		board.startMatch('Mock home team', 'Mock away team');
+		board.endMatch('Mock home team');
+
+		assert.deepEqual(board.getMatches(), []);
+	});
+});
