@@ -9,6 +9,7 @@ describe('orderByScoreThenIndex', () => {
 			awayTeam: 'team b',
 			awayScore: 1,
 			hasEnded: false,
+			index: 0,
 		};
 		const match2 = {
 			homeTeam: 'team c',
@@ -16,6 +17,7 @@ describe('orderByScoreThenIndex', () => {
 			awayTeam: 'team d',
 			awayScore: 0,
 			hasEnded: false,
+			index: 1,
 		};
 
 		const ordered = orderByScoreThenIndex(match1, match2);
@@ -29,6 +31,7 @@ describe('orderByScoreThenIndex', () => {
 			awayTeam: 'team b',
 			awayScore: 0,
 			hasEnded: false,
+			index: 0,
 		};
 		const match2 = {
 			homeTeam: 'team c',
@@ -36,6 +39,7 @@ describe('orderByScoreThenIndex', () => {
 			awayTeam: 'team d',
 			awayScore: 1,
 			hasEnded: false,
+			index: 1,
 		};
 
 		const ordered = orderByScoreThenIndex(match1, match2);
