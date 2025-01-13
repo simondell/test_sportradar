@@ -37,7 +37,7 @@ describe('startMatch()', () => {
 	it('should allow multiple matches to be started', () => {
 		const board = new Scoreboard();
 
-		board.startMatch('team A', 'team b');
+		board.startMatch('team a', 'team b');
 		assert.equal(board.getMatches().length, 1);
 		board.startMatch('team c', 'team d');
 		assert.equal(board.getMatches().length, 2);
@@ -51,10 +51,39 @@ describe('startMatch()', () => {
 describe('endMatch()', () => {
 	it('should allow matches to be ended', () => {
 		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+		board.startMatch('team c', 'team d');
 
-		board.startMatch('Mock home team', 'Mock away team');
-		board.endMatch('Mock home team');
+		board.endMatch('team a');
 
-		assert.deepEqual(board.getMatches(), []);
+		assert.deepEqual(board.getMatches(), [{
+			homeTeam: 'team c',
+			homeScore: 0,
+			awayTeam: 'team d',
+			awayScore: 0,
+		}]);
 	});
+});
+
+describe('updateScore()', () => {
+	it('should update the score of a specific match', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+		board.startMatch('team c', 'team d');
+
+		board.updateScore('team c', 1, 0);
+		board.updateScore('team a', 0, 1);
+
+		assert.deepEqual(board.getMatches(), [{
+			homeTeam: 'team a',
+			homeScore: 0,
+			awayTeam: 'team b',
+			awayScore: 1,
+		},{
+			homeTeam: 'team c',
+			homeScore: 1,
+			awayTeam: 'team d',
+			awayScore: 0,
+		}]);
+	})
 });
