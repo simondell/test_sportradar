@@ -21,19 +21,19 @@ describe('getMatches()', () => {
 		const board = new Scoreboard();
 
 		board.startMatch('team a', 'team b');
-		board.updateScore('team a', 1, 0);
+		board.updateScore('team a', 0, 2);
 		board.startMatch('team c', 'team d');
-		board.updateScore('team c', 0, 2);
+		board.updateScore('team c', 1, 0);
 
 		assert.deepEqual(board.getMatches(), [{
-			homeTeam: 'team c',
+			homeTeam: 'team a',
 			homeScore: 0,
-			awayTeam: 'team d',
+			awayTeam: 'team b',
 			awayScore: 2,
 		},{
-			homeTeam: 'team a',
+			homeTeam: 'team c',
 			homeScore: 1,
-			awayTeam: 'team b',
+			awayTeam: 'team d',
 			awayScore: 0,
 		}]);
 	})
