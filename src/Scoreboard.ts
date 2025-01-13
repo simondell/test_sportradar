@@ -1,5 +1,3 @@
-import { homedir } from "os";
-
 interface ScoreRecord {
 	homeTeam: string;
 	homeScore: number;
