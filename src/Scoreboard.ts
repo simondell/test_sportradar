@@ -7,7 +7,7 @@ interface ScoreRecord {
 	awayScore: number;
 }
 
-interface Match extends ScoreRecord {
+export interface Match extends ScoreRecord {
 	hasEnded: boolean;
 }
 
