@@ -12,12 +12,18 @@ Sportradar would like me to code a "socreboard library". The complete notes are 
 - [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) - to keep me neat and tidy
 - the Scoreboard will be resposible for maintaining its own list of matches, without relying on another module for this purpose. This enables the Scoreboard to be more portable. 
 - in support of the above, the Scoreboard's API will be put together in such a way that consumers/users don't need to know how the Scoreboard represents teams, matches, scores etc
+- I'll [write tickets](https://github.com/simondell/test_sportradar/issues); then commits and PRs will be linked to tickets.
+- tickets will use `"AS A, I WANT, SO THAT"`` format user stories
+- in tickets, the `AS A` clauses can have these personas
+	- `user` refers to a user of the library (likely another engineer because this is a library, but we could imagine it as an end-user assembling a dashboard with a no-code interface too)
+	- `developer` the developer working on the project (me; these are tickets to add DX)
 
 ## Analysis
 
 Some observations on the problem domain:
 
 - we're talking about football/soccer
+- the score board is for the world cup, so there's probably only one of them at a time, in a given application
 - two sides
 - one home, one away side
 - sides have arbitrary names
