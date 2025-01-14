@@ -100,6 +100,15 @@ describe.only('startMatch()', () => {
 
 		assert.throws(actual, 'Cannot start a match with a team currently playing');
 	})
+
+	it('should not start new matches if the away team is already playing', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+
+		const actual = () => {board.startMatch('team c', 'team b');}
+
+		assert.throws(actual, 'Cannot start a match with a team currently playing');
+	})
 });
 
 describe('endMatch()', () => {
