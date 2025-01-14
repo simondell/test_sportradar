@@ -57,6 +57,11 @@ export class Scoreboard {
 
 	updateScore (homeTeam: string, homeScore: number, awayScore: number) {
 		const thisMatch = this.matchesByHomeTeam[homeTeam];
+
+		if(homeScore < thisMatch.homeScore || awayScore < thisMatch.awayScore) {
+			throw "Scores must advance from their previous state";
+		}
+
 		thisMatch.homeScore = homeScore;
 		thisMatch.awayScore = awayScore;
 	}
