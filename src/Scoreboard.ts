@@ -1,27 +1,23 @@
-import { homedir } from "os";
-
-interface ScoreRecord {
-	homeTeam: string;
-	homeScore: number;
-	awayTeam: string;
-	awayScore: number;
-}
-
-interface Match extends ScoreRecord {
-	hasEnded: boolean;
-}
+import { type ScoreRecord } from "./types/ScoreRecord";
+import { type Match } from "./types/Match";
 
 export class Scoreboard {
 	private matches: Match[] = [];
 	private matchesByHomeTeam: {[key: string]: Match} = {};
+	private matchIndex = 0;
 
-	private static createScoreRecord (homeTeam: string, awayTeam: string): Match {
+	private static createScoreRecord (
+		homeTeam: string,
+		awayTeam: string,
+		index: number
+	): Match {
 		return {
 			homeTeam,
 			awayTeam,
 			homeScore: 0,
 			awayScore: 0,
 			hasEnded: false,
+			index,
 		}
 	}
 
@@ -44,7 +40,8 @@ export class Scoreboard {
 	}
 
 	startMatch (homeTeam: string, awayTeam: string) {
-		const newMatch = Scoreboard.createScoreRecord(homeTeam, awayTeam);
+		this.matchIndex += 1;
+		const newMatch = Scoreboard.createScoreRecord(homeTeam, awayTeam, this.matchIndex);
 		this.matchesByHomeTeam[homeTeam] = newMatch;
 		this.matches.push(newMatch);
 	}
