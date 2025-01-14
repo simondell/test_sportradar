@@ -62,6 +62,7 @@ export class Scoreboard {
 	updateScore (homeTeam: string, homeScore: number, awayScore: number) {
 		const thisMatch = this.matchesByHomeTeam[homeTeam];
 
+		if(!thisMatch) throw new Error('Cannot update missing or ended matches');
 		if(homeScore < thisMatch.homeScore || awayScore < thisMatch.awayScore) {
 			throw "Scores must advance from their previous state";
 		}
