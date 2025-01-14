@@ -132,7 +132,7 @@ describe('endMatch()', () => {
 	
 		const premature = () => { board.endMatch('team a'); };
 
-		assert.throws(premature, 'Cannot end a match which has not begun')
+		assert.throws(premature, 'Cannot end a match which unless it is in progress')
 	})
 
 	it('should block ending a match that has already ended', () => {
@@ -142,7 +142,7 @@ describe('endMatch()', () => {
 
 		const premature = () => { board.endMatch('team a'); };
 
-		assert.throws(premature, 'Cannot end a match more than once')
+		assert.throws(premature, 'Cannot end a match which unless it is in progress')
 	})
 });
 
@@ -190,7 +190,7 @@ describe('updateScore()', () => {
 
 		const regression = () => {board.updateScore('team a', 0, 2)};
 
-		assert.throws(regression, "Scores must advance from their previous state");
+		assert.throws(regression, 'Scores must advance from their previous state');
 	});
 
 	it('should throw an error when regressing the away team score', () => {
@@ -200,7 +200,7 @@ describe('updateScore()', () => {
 
 		const regression = () => {board.updateScore('team a', 2, 0)};
 
-		assert.throws(regression, "Scores must advance from their previous state");
+		assert.throws(regression, 'Scores must advance from their previous state');
 	});
 
 	it('should throw an error when updating with a negative', () => {
