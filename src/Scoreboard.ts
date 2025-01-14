@@ -25,8 +25,12 @@ export class Scoreboard {
 
 	endMatch (homeTeam: string) {
 		const thisMatch = this.matchesByHomeTeam[homeTeam];
+
+		if(!thisMatch) throw new Error("Cannot end a match which unless it is in progress");
+
 		thisMatch.hasEnded = true;
 		delete this.matchesByHomeTeam[homeTeam];
+		delete this.matchesByAwayTeam[thisMatch.awayTeam];
 	}
 
 	getMatches (): ScoreRecord[] {
