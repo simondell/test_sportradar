@@ -50,7 +50,7 @@ export class Scoreboard {
 		if(
 			this.matchesByHomeTeam[homeTeam] !== undefined
 			|| this.matchesByAwayTeam[awayTeam] !== undefined
-		) throw "Cannot start a match with a team currently playing";
+		) throw new Error('Cannot start a match with a team currently playing');
 
 		this.matchIndex += 1;
 		const newMatch = Scoreboard.createScoreRecord(homeTeam, awayTeam, this.matchIndex);
@@ -64,7 +64,7 @@ export class Scoreboard {
 
 		if(!thisMatch) throw new Error('Cannot update missing or ended matches');
 		if(homeScore < thisMatch.homeScore || awayScore < thisMatch.awayScore) {
-			throw "Scores must advance from their previous state";
+			throw new Error('Scores must advance from their previous state');
 		}
 
 		thisMatch.homeScore = homeScore;
