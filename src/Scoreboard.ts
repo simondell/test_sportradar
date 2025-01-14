@@ -5,10 +5,12 @@ import { orderByScoreThenIndex } from "./utils/orderByScoreThenIndex";
 /**
  * Creates a new Scoreboard instance
  * @class
- * @method endMatch {Function} - ends a match for a given home team
- * @method getMatches {Function} - returns an array of ScoreRecords, sorted by score and start time
- * @method startMatch {Function} - starts a match between given home and away teams
- * @method updateScore {Function} - allows updating new scores for a match at a given home team's venue
+ * 
+ * Available methods:
+ * - endMatch {Function} - ends a match for a given home team
+ * - getMatches {Function} - returns an array of ScoreRecords, sorted by score and start time
+ * - startMatch {Function} - starts a match between given home and away teams
+ * - updateScore {Function} - allows updating new scores for a match at a given home team's venue
  */
 export class Scoreboard {
 	private matches: Match[] = [];
