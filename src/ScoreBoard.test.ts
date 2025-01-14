@@ -16,6 +16,27 @@ describe('getMatches()', () => {
 
 		assert.deepEqual(board.getMatches(), []);
 	});
+
+	it('should return matches in order of total score', () => {
+		const board = new Scoreboard();
+
+		board.startMatch('team a', 'team b');
+		board.updateScore('team a', 0, 2);
+		board.startMatch('team c', 'team d');
+		board.updateScore('team c', 1, 0);
+
+		assert.deepEqual(board.getMatches(), [{
+			homeTeam: 'team a',
+			homeScore: 0,
+			awayTeam: 'team b',
+			awayScore: 2,
+		},{
+			homeTeam: 'team c',
+			homeScore: 1,
+			awayTeam: 'team d',
+			awayScore: 0,
+		}]);
+	})
 });
 
 describe('startMatch()', () => {
