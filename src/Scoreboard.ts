@@ -42,6 +42,8 @@ export class Scoreboard {
 	}
 
 	startMatch (homeTeam: string, awayTeam: string) {
+		if(this.matchesByHomeTeam[homeTeam] !== undefined) throw "Cannot start a match with a team currently playing";
+
 		this.matchIndex += 1;
 		const newMatch = Scoreboard.createScoreRecord(homeTeam, awayTeam, this.matchIndex);
 		this.matchesByHomeTeam[homeTeam] = newMatch;
