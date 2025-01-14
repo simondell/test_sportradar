@@ -5,6 +5,7 @@ import { orderByScoreThenIndex } from "./utils/orderByScoreThenIndex";
 export class Scoreboard {
 	private matches: Match[] = [];
 	private matchesByHomeTeam: {[key: string]: Match} = {};
+	private matchesByAwayTeam: {[key: string]: Match} = {};
 	private matchIndex = 0;
 
 	private static createScoreRecord (
@@ -42,11 +43,15 @@ export class Scoreboard {
 	}
 
 	startMatch (homeTeam: string, awayTeam: string) {
-		if(this.matchesByHomeTeam[homeTeam] !== undefined) throw "Cannot start a match with a team currently playing";
+		if(
+			this.matchesByHomeTeam[homeTeam] !== undefined
+			|| this.matchesByAwayTeam[awayTeam] !== undefined
+		) throw "Cannot start a match with a team currently playing";
 
 		this.matchIndex += 1;
 		const newMatch = Scoreboard.createScoreRecord(homeTeam, awayTeam, this.matchIndex);
 		this.matchesByHomeTeam[homeTeam] = newMatch;
+		this.matchesByAwayTeam[awayTeam] = newMatch;
 		this.matches.push(newMatch);
 	}
 
