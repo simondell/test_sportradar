@@ -211,4 +211,22 @@ describe('updateScore()', () => {
 
 		assert.throws(negativeScore, "Scores must advance from their previous state");
 	});
+
+	it('should throw an error when updating a missing match', () => {
+		const board = new Scoreboard();
+
+		const missingMatch = () => {board.updateScore('team a', 1, 0)};
+
+		assert.throws(missingMatch, "Cannot update missing or ended matches");
+	});
+
+	it('should throw an error when updating an ended match', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+		board.endMatch('team a');
+
+		const endedMatch = () => {board.updateScore('team a', 1, 0)};
+
+		assert.throws(endedMatch, "Cannot update missing or ended matches");
+	});
 });
