@@ -23,7 +23,7 @@ export class Scoreboard {
 	 * @param {number} index An index for the match; must be unique; this is a flaw in design. The method is a private static function, so consumers can't easily use it directly. Therefore the Scoreboard class must manage the indeces. It does this, but the algorithm is opaque and not covered by enough tests.
 	 * @returns {Match} Returns an object meeting the Match interface
 	 */
-	private static createScoreRecord (
+	private static createMatch (
 		homeTeam: string,
 		awayTeam: string,
 		index: number
@@ -85,7 +85,7 @@ export class Scoreboard {
 		) throw new Error('Cannot start a match with a team currently playing');
 
 		this.matchIndex += 1;
-		const newMatch = Scoreboard.createScoreRecord(homeTeam, awayTeam, this.matchIndex);
+		const newMatch = Scoreboard.createMatch(homeTeam, awayTeam, this.matchIndex);
 		this.matchesByHomeTeam[homeTeam] = newMatch;
 		this.matchesByAwayTeam[awayTeam] = newMatch;
 		this.matches.push(newMatch);
