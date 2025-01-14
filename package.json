@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "mocha -r tsx --extension ts 'src/**/*.test.ts'",
-    "test:watch": "mocha -r tsx --watch 'src/**/*.{ts,test.ts}' --extension ts 'src/**/*.test.ts'"
+    "test:watch": "mocha -r tsx --watch 'src/**/*.{ts,test.ts}' --extension ts 'src/**/*.test.ts'",
+    "type-docs": "typedoc"
   },
   "keywords": [
     "sportradar",
@@ -22,6 +23,7 @@
     "chai": "^5.1.2",
     "mocha": "^11.0.1",
     "tsx": "^4.19.2",
+    "typedoc": "^0.27.6",
     "typescript": "^5.7.3"
   }
 }
