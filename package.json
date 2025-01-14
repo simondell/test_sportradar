@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "mocha -r tsx --typescript --extension ts 'src/**/*.test.ts'",
-    "test:watch": "mocha -r tsx --typescript --watch 'src/**/*.{ts,test.ts}' --extension ts 'src/**/*.test.ts'"
+    "test": "mocha -r tsx --extension ts 'src/**/*.test.ts'",
+    "test:watch": "mocha -r tsx --watch 'src/**/*.{ts,test.ts}' --extension ts 'src/**/*.test.ts'"
   },
   "keywords": [
     "sportradar",
