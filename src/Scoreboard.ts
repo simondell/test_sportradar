@@ -30,6 +30,7 @@ export class Scoreboard {
 
 		thisMatch.hasEnded = true;
 		delete this.matchesByHomeTeam[homeTeam];
+		delete this.matchesByAwayTeam[thisMatch.awayTeam];
 	}
 
 	getMatches (): ScoreRecord[] {
