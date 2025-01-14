@@ -63,7 +63,7 @@ describe('getMatches()', () => {
 	})
 });
 
-describe('startMatch()', () => {
+describe.only('startMatch()', () => {
 	it('should allow new matches to be started', () => {
 		const board = new Scoreboard();
 
@@ -91,6 +91,24 @@ describe('startMatch()', () => {
 		board.startMatch('team g', 'team h');
 		assert.equal(board.getMatches().length, 4);
 	});
+
+	it('should not start new matches if the home team is already playing', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+
+		const actual = () => {board.startMatch('team a', 'team c');}
+
+		assert.throws(actual, 'Cannot start a match with a team currently playing');
+	})
+
+	it('should not start new matches if the away team is already playing', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+
+		const actual = () => {board.startMatch('team c', 'team b');}
+
+		assert.throws(actual, 'Cannot start a match with a team currently playing');
+	})
 });
 
 describe('endMatch()', () => {
