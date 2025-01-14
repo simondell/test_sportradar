@@ -41,7 +41,6 @@ Some observations on the problem domain:
 - initially I felt "matches" could be modelled as a class. They're discrete data, and `new Match(homeTeam, awayTeam)` felt like a nice interface for them. 
 - later, having both an interface `TMatch` with just the scores, and a class `Match` with the other settings seemed to highlight how the Match class was poorly factored. Matches aren't used outside of the Scoreboard. Nothing else consumes them. Some of their concerns (`hasEnded`, `totalScore`) are only relevant to the internal workings of Scoreboard. So, instead, I think better to have a private static method to create them and to lose the class.
 - ordering matches for display could be implemented by a callback passed to Array.prototye.sort(). This makes the sort rules unit-testable.
-
-
+- in order to order the Matches, the Match models needed an index. I could have used the original match array and **not** done an in-place sort with `Array.prototype.sort()` to get the output results, but I'm comfortable with this solution. It allows the sort rules to sit together in one function. I was able to unit test that function, with a "casual" integration test in the main class' test suite. 
 
 
