@@ -8,6 +8,30 @@ describe('Scoreboard', () => {
 
 		assert.notEqual(boardA, boardB);
 	});
+
+	it('should produce the expected results for the challenge provided test data', () => {
+		const board = new Scoreboard();
+
+		type TestMatch = [string, number, number, string]
+
+		const matches: TestMatch[] = [
+			['Mexico', 0, 5, 'Canada'],
+			['Spain', 10, 2, 'Brazil'],
+			['Germany', 2, 2, 'France'],
+			['Uruguay', 6, 6, 'Italy'],
+			['Argentina', 3, 1, 'Australia'],
+		]
+		matches.forEach(([home,,,away]) => {board.startMatch(home, away)});
+		matches.forEach(([home,homeScore,awayScore,]) => {board.updateScore(home, homeScore, awayScore)});
+
+		assert.deepEqual(board.getMatches(), [
+			{ homeTeam: 'Uruguay', homeScore: 6, awayTeam: 'Italy', awayScore: 6, },
+			{ homeTeam: 'Spain', homeScore: 10, awayTeam: 'Brazil', awayScore: 2, },
+			{ homeTeam: 'Mexico', homeScore: 0, awayTeam: 'Canada', awayScore: 5, },
+			{ homeTeam: 'Argentina', homeScore: 3, awayTeam: 'Australia', awayScore: 1, },
+			{ homeTeam: 'Germany', homeScore: 2, awayTeam: 'France', awayScore: 2, },
+		]);
+	})
 });
 
 describe('getMatches()', () => {
@@ -96,15 +120,15 @@ describe('updateScore()', () => {
 		board.updateScore('team a', 0, 1);
 
 		assert.deepEqual(board.getMatches(), [{
-			homeTeam: 'team a',
-			homeScore: 0,
-			awayTeam: 'team b',
-			awayScore: 1,
-		},{
 			homeTeam: 'team c',
 			homeScore: 1,
 			awayTeam: 'team d',
 			awayScore: 0,
+		},{
+			homeTeam: 'team a',
+			homeScore: 0,
+			awayTeam: 'team b',
+			awayScore: 1,
 		}]);
 	})
 });

@@ -1,5 +1,6 @@
 import { type ScoreRecord } from "./types/ScoreRecord";
 import { type Match } from "./types/Match";
+import { orderByScoreThenIndex } from "./utils/orderByScoreThenIndex";
 
 export class Scoreboard {
 	private matches: Match[] = [];
@@ -30,6 +31,7 @@ export class Scoreboard {
 	getMatches (): ScoreRecord[] {
 		return (this.matches
 			.filter(match => !match.hasEnded)
+			.sort(orderByScoreThenIndex)
 			.map(match => ({
 				homeTeam: match.homeTeam,
 				homeScore: match.homeScore,

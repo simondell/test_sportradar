@@ -46,14 +46,14 @@ describe('orderByScoreThenIndex', () => {
 		assert.equal(ordered, 1);
 	});
 
-	it('order by match index if scores are equal', () => {
+	it('order by non-ascending match index if scores are equal', () => {
 		const match1 = {
 			homeTeam: 'team a',
 			homeScore: 1,
 			awayTeam: 'team b',
 			awayScore: 1,
 			hasEnded: false,
-			index: 1,
+			index: 3,
 		};
 		const match2 = {
 			homeTeam: 'team c',
@@ -61,10 +61,10 @@ describe('orderByScoreThenIndex', () => {
 			awayTeam: 'team d',
 			awayScore: 1,
 			hasEnded: false,
-			index: 0,
+			index: 1,
 		};
 
 		const ordered = orderByScoreThenIndex(match1, match2);
-		assert.equal(ordered, 1);
+		assert.equal(ordered, -1);
 	});
 });
