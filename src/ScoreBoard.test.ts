@@ -148,5 +148,49 @@ describe('updateScore()', () => {
 			awayTeam: 'team b',
 			awayScore: 1,
 		}]);
-	})
+	});
+
+	it('should use absolute score values', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+
+		board.updateScore('team a', 1, 0);
+		board.updateScore('team a', 3, 1);
+
+		assert.deepEqual(board.getMatches(), [{
+			homeTeam: 'team a',
+			homeScore: 3,
+			awayTeam: 'team b',
+			awayScore: 1,
+		}]);
+	});
+
+	it('should throw an error when regressing the home team score', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+		board.updateScore('team a', 1, 2);
+
+		const regression = () => {board.updateScore('team a', 0, 2)};
+
+		assert.throws(regression, "Scores must advance from their previous state");
+	});
+
+	it('should throw an error when regressing the away team score', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+		board.updateScore('team a', 2, 1);
+
+		const regression = () => {board.updateScore('team a', 2, 0)};
+
+		assert.throws(regression, "Scores must advance from their previous state");
+	});
+
+	it('should throw an error when updating with a negative', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+
+		const negativeScore = () => {board.updateScore('team a', -1, 0)};
+
+		assert.throws(negativeScore, "Scores must advance from their previous state");
+	});
 });
