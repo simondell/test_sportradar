@@ -1,12 +1,12 @@
 {
   "name": "simple-score-board",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A solution to Sportradar's coding challenge",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "mocha -r tsx --typescript 'src/**/*.test.ts'",
-    "test:watch": "mocha -r tsx --typescript --watch 'src/**/*.{ts,test.ts}' --extension ts 'src/**/*.test.ts'"
+    "test": "mocha -r tsx --extension ts 'src/**/*.test.ts'",
+    "test:watch": "mocha -r tsx --watch 'src/**/*.{ts,test.ts}' --extension ts 'src/**/*.test.ts'"
   },
   "keywords": [
     "sportradar",
