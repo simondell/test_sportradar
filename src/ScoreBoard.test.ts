@@ -63,7 +63,7 @@ describe('getMatches()', () => {
 	})
 });
 
-describe.only('startMatch()', () => {
+describe('startMatch()', () => {
 	it('should allow new matches to be started', () => {
 		const board = new Scoreboard();
 
