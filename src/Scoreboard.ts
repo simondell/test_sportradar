@@ -1,14 +1,5 @@
-interface ScoreRecord {
-	homeTeam: string;
-	homeScore: number;
-	awayTeam: string;
-	awayScore: number;
-}
-
-export interface Match extends ScoreRecord {
-	hasEnded: boolean;
-	index: number;
-}
+import { type ScoreRecord } from "./types/ScoreRecord";
+import { type Match } from "./types/Match";
 
 export class Scoreboard {
 	private matches: Match[] = [];

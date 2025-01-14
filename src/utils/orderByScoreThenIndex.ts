@@ -1,5 +1,5 @@
 import { log } from 'console';
-import { type Match } from '../Scoreboard';
+import { type Match } from '../types/Match';
 
 export function orderByScoreThenIndex (match1: Match, match2: Match): -1 | 1 {
 	const match1Total = match1.homeScore + match1.awayScore;
