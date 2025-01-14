@@ -120,15 +120,15 @@ describe('updateScore()', () => {
 		board.updateScore('team a', 0, 1);
 
 		assert.deepEqual(board.getMatches(), [{
-			homeTeam: 'team a',
-			homeScore: 0,
-			awayTeam: 'team b',
-			awayScore: 1,
-		},{
 			homeTeam: 'team c',
 			homeScore: 1,
 			awayTeam: 'team d',
 			awayScore: 0,
+		},{
+			homeTeam: 'team a',
+			homeScore: 0,
+			awayTeam: 'team b',
+			awayScore: 1,
 		}]);
 	})
 });
