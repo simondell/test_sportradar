@@ -13,7 +13,7 @@ import { orderByScoreThenIndex } from "./utils/orderByScoreThenIndex";
  * - updateScore {Function} - allows updating new scores for a match at a given home team's venue
  */
 export class Scoreboard {
-	private matches: Match[] = [];
+	// private matches: Match[] = [];
 	private matchesByHomeTeam: {[key: string]: Match} = {};
 	private matchesByAwayTeam: {[key: string]: Match} = {};
 	private matchIndex = 0;
@@ -35,7 +35,6 @@ export class Scoreboard {
 			awayTeam,
 			homeScore: 0,
 			awayScore: 0,
-			hasEnded: false,
 			index,
 		}
 	}
@@ -51,7 +50,7 @@ export class Scoreboard {
 
 		if(!thisMatch) throw new Error("Cannot end a match which unless it is in progress");
 
-		thisMatch.hasEnded = true;
+		// thisMatch.hasEnded = true;
 		delete this.matchesByHomeTeam[homeTeam];
 		delete this.matchesByAwayTeam[thisMatch.awayTeam];
 	}
@@ -105,7 +104,7 @@ export class Scoreboard {
 		const newMatch = Scoreboard.createMatch(homeTeam, awayTeam, this.matchIndex);
 		this.matchesByHomeTeam[homeTeam] = newMatch;
 		this.matchesByAwayTeam[awayTeam] = newMatch;
-		this.matches.push(newMatch);
+		// this.matches.push(newMatch);
 	}
 
 	/**
