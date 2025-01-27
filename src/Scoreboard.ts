@@ -61,15 +61,30 @@ export class Scoreboard {
 	 * @return {array} Returns an array of ScoreRecord objects, ordered descending by total score and then by most recent kick-off
 	 */
 	getMatches (): ScoreRecord[] {
-		return (this.matches
-			.filter(match => !match.hasEnded)
-			.sort(orderByScoreThenIndex)
-			.map(match => ({
-				homeTeam: match.homeTeam,
-				homeScore: match.homeScore,
-				awayTeam: match.awayTeam,
-				awayScore: match.awayScore,
-			}))
+		// T: O(2n) + O(n log n)
+		//
+		// return (this.matches
+		// 	.filter(match => !match.hasEnded)
+		// 	.sort(orderByScoreThenIndex)
+		// 	.map(match => ({
+		// 		homeTeam: match.homeTeam,
+		// 		homeScore: match.homeScore,
+		// 		awayTeam: match.awayTeam,
+		// 		awayScore: match.awayScore,
+		// 	}))
+		// );
+
+		// O(3n) +  O(n log n)
+		return (
+			Object.entries(this.matchesByHomeTeam)
+				.map(([homeTeam, match]) => match)
+				.sort(orderByScoreThenIndex)
+				.map(match => ({
+					homeTeam: match.homeTeam,
+					homeScore: match.homeScore,
+					awayTeam: match.awayTeam,
+					awayScore: match.awayScore,
+				}))
 		);
 	}
 
