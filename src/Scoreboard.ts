@@ -13,7 +13,6 @@ import { orderByScoreThenIndex } from "./utils/orderByScoreThenIndex";
  * - updateScore {Function} - allows updating new scores for a match at a given home team's venue
  */
 export class Scoreboard {
-	// private matches: Match[] = [];
 	private matchesByHomeTeam: {[key: string]: Match} = {};
 	private matchesByAwayTeam: {[key: string]: Match} = {};
 	private matchIndex = 0;
@@ -50,7 +49,6 @@ export class Scoreboard {
 
 		if(!thisMatch) throw new Error("Cannot end a match which unless it is in progress");
 
-		// thisMatch.hasEnded = true;
 		delete this.matchesByHomeTeam[homeTeam];
 		delete this.matchesByAwayTeam[thisMatch.awayTeam];
 	}
@@ -60,20 +58,6 @@ export class Scoreboard {
 	 * @return {array} Returns an array of ScoreRecord objects, ordered descending by total score and then by most recent kick-off
 	 */
 	getMatches (): ScoreRecord[] {
-		// T: O(2n) + O(n log n)
-		//
-		// return (this.matches
-		// 	.filter(match => !match.hasEnded)
-		// 	.sort(orderByScoreThenIndex)
-		// 	.map(match => ({
-		// 		homeTeam: match.homeTeam,
-		// 		homeScore: match.homeScore,
-		// 		awayTeam: match.awayTeam,
-		// 		awayScore: match.awayScore,
-		// 	}))
-		// );
-
-		// O(3n) +  O(n log n)
 		return (
 			Object.entries(this.matchesByHomeTeam)
 				.map(([homeTeam, match]) => match)
@@ -104,7 +88,6 @@ export class Scoreboard {
 		const newMatch = Scoreboard.createMatch(homeTeam, awayTeam, this.matchIndex);
 		this.matchesByHomeTeam[homeTeam] = newMatch;
 		this.matchesByAwayTeam[awayTeam] = newMatch;
-		// this.matches.push(newMatch);
 	}
 
 	/**
