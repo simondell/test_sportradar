@@ -71,6 +71,16 @@ export class Scoreboard {
 		);
 	}
 
+	getScore(teamName: string): number  {
+		const homeMatch = this.matchesByHomeTeam[teamName];
+		const awayMatch = this.matchesByAwayTeam[teamName];
+
+		if(!(homeMatch || awayMatch)) throw new Error('Cannot find given team in current matches');
+
+		if(homeMatch) return homeMatch.homeScore;
+		if(awayMatch) return awayMatch.awayScore;
+	}
+
 	/**
 	 * Starts a new match, which means adding a Match instance to the private matches array
 	 * @param {string} homeTeam The name of the home team

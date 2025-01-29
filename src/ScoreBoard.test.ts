@@ -230,3 +230,38 @@ describe('updateScore()', () => {
 		assert.throws(endedMatch, "Cannot update missing or ended matches");
 	});
 });
+
+describe(`getScore()`, () => {
+	const mockScores = 	[[3, 1], [0, 6], [1, 1], [0, 0], [10, 23]];
+
+	mockScores.forEach(([homeScore, awayScore]) => {
+		it('should return the current score for the given home team', () => {
+			const board = new Scoreboard();
+			board.startMatch('team a', 'team b');
+			board.updateScore('team a', homeScore, awayScore);
+
+			assert.equal(board.getScore('team a'), homeScore);
+		});
+	});
+
+	mockScores.forEach(([homeScore, awayScore]) => {
+		it('should return the current score for the given away team', () => {
+			const board = new Scoreboard();
+			board.startMatch('team a', 'team b');
+			board.updateScore('team a', homeScore, awayScore);
+
+			assert.equal(board.getScore('team b'), awayScore);
+		});
+	});
+
+	it('should throw an error when the given team has no current matches', () => {
+		const board = new Scoreboard();
+		board.startMatch('team a', 'team b');
+		board.updateScore('team a', 3, 1);
+
+		assert.throw(
+			() => {board.getScore('team c')},
+			"Cannot find given team in current matches"
+		);
+	})
+});
